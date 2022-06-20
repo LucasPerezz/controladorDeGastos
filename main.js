@@ -30,6 +30,7 @@ let categoriaSeleccionada = document.getElementById('categoriaSeleccionada');
 
 const anadirGastos = () => {
     const ingresoGasto = Number(document.getElementById('ingresoGasto').value);
+    const ingresoDinero = Number(document.getElementById('ingresoDinero').value);
     if(categoriaSeleccionada.value === "Facturas") {
         gastosTot += ingresoGasto;
         totalDinero -= ingresoGasto;
@@ -40,6 +41,7 @@ const anadirGastos = () => {
         localStorage.setItem("Gastos", gastosTot);
         localStorage.setItem("Dinero", totalDinero);
         facturas = document.getElementById('facturas').textContent = "$" + gastosFacturas;
+        resumen(ingresoDinero, ingresoGasto);
     } else if (categoriaSeleccionada.value === "Comida") {
         gastosTot += ingresoGasto;
         totalDinero -= ingresoGasto;
@@ -114,6 +116,90 @@ const agregarDinero = () => {
 }
 
 
+const restarDineroActual = () => {
+    const ingresoDinero = Number(document.getElementById('ingresoDinero').value);
+    let informacionDinero = localStorage.getItem("Dinero");
+    totalDinero = Number(informacionDinero);
+    totalDinero -= ingresoDinero;
+    localStorage.setItem("Dinero", totalDinero);
+    dineroActual = document.getElementById('money').textContent = "$" + totalDinero;
+}
+
+const restarDineroPorCategoria = () => {
+    const ingresoGasto = Number(document.getElementById('ingresoGasto').value);
+    const ingresoDinero = Number(document.getElementById('ingresoDinero').value);
+    if(categoriaSeleccionada.value === "Facturas") {
+        gastosTot -= ingresoGasto;
+        totalDinero += ingresoGasto;
+        dineroActual = document.getElementById('money').textContent = "$" + totalDinero;
+        totalGastos = document.getElementById('gastos').textContent = "$" + gastosTot;
+        gastosFacturas -= ingresoGasto;
+        localStorage.setItem("Facturas", gastosFacturas);
+        localStorage.setItem("Gastos", gastosTot);
+        localStorage.setItem("Dinero", totalDinero);
+        facturas = document.getElementById('facturas').textContent = "$" + gastosFacturas;
+    } else if (categoriaSeleccionada.value === "Comida") {
+        gastosTot -= ingresoGasto;
+        totalDinero += ingresoGasto;
+        dineroActual = document.getElementById('money').textContent = "$" + totalDinero;
+        totalGastos = document.getElementById('gastos').textContent = "$" + gastosTot;
+        gastosComida -= ingresoGasto;
+        localStorage.setItem("Comida", gastosComida);
+        localStorage.setItem("Gastos", gastosTot);
+        localStorage.setItem("Dinero", totalDinero);
+        comida = document.getElementById('comida').textContent = "$" + gastosComida;
+    } else if (categoriaSeleccionada.value === 'Ropa') {
+        gastosTot -= ingresoGasto;
+        totalDinero += ingresoGasto;
+        dineroActual = document.getElementById('money').textContent = "$" + totalDinero;
+        totalGastos = document.getElementById('gastos').textContent = "$" + gastosTot;
+        gastosRopa -= ingresoGasto;
+        localStorage.setItem("Ropa", gastosRopa);
+        localStorage.setItem("Gastos", gastosTot);
+        localStorage.setItem("Dinero", totalDinero);
+        document.getElementById('ropa').textContent = "$" + gastosRopa;
+    } else if (categoriaSeleccionada.value === 'Entretenimiento') {
+        gastosTot -= ingresoGasto;
+        totalDinero += ingresoGasto;
+        dineroActual = document.getElementById('money').textContent = "$" + totalDinero;
+        totalGastos = document.getElementById('gastos').textContent = "$" + gastosTot;
+        gastosEntretenimiento -= ingresoGasto;
+        localStorage.setItem("Entretenimiento", gastosEntretenimiento);
+        localStorage.setItem("Gastos", gastosTot);
+        localStorage.setItem("Dinero", totalDinero);
+        entretenimiento = document.getElementById('entretenimiento').textContent  = "$" + gastosEntretenimiento;
+    } else if (categoriaSeleccionada.value === 'Shopping') {
+        gastosTot -= ingresoGasto;
+        totalDinero += ingresoGasto;
+        dineroActual = document.getElementById('money').textContent = "$" + totalDinero;
+        totalGastos = document.getElementById('gastos').textContent = "$" + gastosTot;
+        gastosShopping -= ingresoGasto;
+        localStorage.setItem("Shopping", gastosShopping);
+        localStorage.setItem("Gastos", gastosTot);
+        localStorage.setItem("Dinero", totalDinero);
+        shopping = document.getElementById('shopping').textContent = "$" + gastosShopping;
+    } else if (categoriaSeleccionada.value === 'Deportes') {
+        gastosTot -= ingresoGasto;
+        totalDinero += ingresoGasto;
+        dineroActual = document.getElementById('money').textContent = "$" + totalDinero;
+        totalGastos = document.getElementById('gastos').textContent = "$" + gastosTot;
+        gastosDeportes -= ingresoGasto;
+        localStorage.setItem("Deportes", gastosDeportes);
+        localStorage.setItem("Gastos", gastosTot);
+        localStorage.setItem("Dinero", totalDinero);
+        deportes = document.getElementById('deportes').textContent = "$" + gastosDeportes;
+    } else {
+        gastosTot -= ingresoGasto;
+        totalDinero += ingresoGasto;
+        dineroActual = document.getElementById('money').textContent = "$" + totalDinero;
+        totalGastos = document.getElementById('gastos').textContent = "$" + gastosTot;
+        gastosOtros -= ingresoGasto;
+        localStorage.setItem("Otros", gastosOtros);
+        localStorage.setItem("Gastos", gastosTot);
+        localStorage.setItem("Dinero", totalDinero);
+        otros = document.getElementById('otros').textContent = "$" + gastosOtros;
+    }
+}
 
 //Acciones por usuario
 const botonIngreso = document.getElementById('buttonIngreso').addEventListener("click", agregarDinero);
@@ -122,4 +208,7 @@ const botonIngreso = document.getElementById('buttonIngreso').addEventListener("
 
 const botonAnadir = document.getElementById('buttonAnadir').addEventListener('click', anadirGastos);
 
+const restarDineroGeneral = document.getElementById('buttonResta').addEventListener('click', restarDineroActual)
 
+
+const restaCategoria = document.getElementById('buttonRestar').addEventListener('click', restarDineroPorCategoria)

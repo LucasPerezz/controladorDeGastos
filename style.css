@@ -105,6 +105,15 @@ body {
     color: #fff;
 }
 
+.buttonResta {
+    border: 1px solid #fff;
+    background-color: rgb(255, 71, 71);
+    border-radius: 12px;
+    height: 4vh;
+    color: #fff;
+    grid-column: 2/2;
+}
+
 .buttonAnadir {
     border: 1px solid #fff;
     background-color: rgb(71, 172, 255);
